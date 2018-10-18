@@ -216,6 +216,15 @@ Crafty.defineScene("game", function () {
         h: baseSize
     }).color("yellow");
     
+    var upgraderInfo = Crafty.e("2D, DOM, Text").unselectable();
+    upgraderInfo.textFont({ size: "14px" });
+    upgraderInfo.text("Upgrade");
+    upgraderInfo.attr({ x: upgrader.x, y: upgrader.y, w: upgrader.w });
+    upgraderInfo.y = upgrader.y + 16;
+    upgraderInfo.css("textAlign", "center");
+    upgraderInfo.textColor("black");
+    upgraderInfo.z = 8;
+
     upgrader.bind("Click", function () {
         var did;
         if (upg === false) {
@@ -267,6 +276,15 @@ Crafty.defineScene("game", function () {
         h: baseSize
     }).color("red");
     
+    var pauseButtonInfo = Crafty.e("2D, DOM, Text").unselectable();
+    pauseButtonInfo.textFont({ size: "14px" });
+    pauseButtonInfo.text("Pause / Start");
+    pauseButtonInfo.attr({ x: pauseButton.x, y: pauseButton.y, w: pauseButton.w });
+    pauseButtonInfo.y = pauseButton.y + 16;
+    pauseButtonInfo.css("textAlign", "center");
+    pauseButtonInfo.textColor("black");
+    pauseButtonInfo.z = 8;
+
     //Temporarly
     pauseButton.bind("Click", function () {
         //totalMass += 500;
