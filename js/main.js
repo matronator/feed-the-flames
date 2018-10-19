@@ -41,6 +41,7 @@ Crafty.defineScene("game", function () {
     //Dots definition
     var dots = [], dotsInner = [], dotsClicker = [], dotsLevel = [], dotsCount = 0, baseMass = 100, baseLevel = 1, baseUpgCost = 50, baseSize = 64, baseMassPerClick = 10, baseUpgPow = 2.5, baseNewDotCost = 100, baseDotCost = 100;
     var dotsHor = 0, dotsVer = 0;
+    var baseDotY = (curHeight / 2) - baseSize;
     
     //Score
     var totalMass = 0, totalScore = 0, growth = 0, upg = false, delayTimeMass = 200, delayTimeScore = 1000;
@@ -62,7 +63,7 @@ Crafty.defineScene("game", function () {
     }
     
     //Create first dot
-    createDot(dotsCount, (curWidth / 2) - (baseSize / 2), 10, baseSize, baseLevel, baseMass);
+    createDot(dotsCount, (curWidth / 2) - (baseSize / 2), baseDotY, baseSize, baseLevel, baseMass);
     
     function createDot(dind, xc, yc, size, level, mass) {
         //Main part
@@ -201,7 +202,7 @@ Crafty.defineScene("game", function () {
                 dotsClicker[dcif].x = dots[dcif].x;
                 dotsLevel[dcif].x = dots[dcif].x;
             }
-            createDot(dotsCount, dots[dotsCount - 1].x + baseSize + 10, 10, baseSize, baseLevel, baseMass);
+            createDot(dotsCount, dots[dotsCount - 1].x + baseSize + 10, baseDotY, baseSize, baseLevel, baseMass);
             baseNewDotCost = Math.pow(dotsCount, 2) * baseDotCost;
             dotCreatorInfo.text(baseNewDotCost.toString());
         }
@@ -210,7 +211,7 @@ Crafty.defineScene("game", function () {
     //Button for upgrading dots
     var upgrader = Crafty.e("2D, Canvas, Color, Mouse");
     upgrader.attr({
-        x: 210,
+        x: curWidth - baseSize,
         y: 310,
         w: baseSize,
         h: baseSize
@@ -220,7 +221,7 @@ Crafty.defineScene("game", function () {
     upgraderInfo.textFont({ size: "14px" });
     upgraderInfo.text("Upgrade");
     upgraderInfo.attr({ x: upgrader.x, y: upgrader.y, w: upgrader.w });
-    upgraderInfo.y = upgrader.y + 16;
+    upgraderInfo.y = upgrader.y + 25;
     upgraderInfo.css("textAlign", "center");
     upgraderInfo.textColor("black");
     upgraderInfo.z = 8;
@@ -270,7 +271,7 @@ Crafty.defineScene("game", function () {
     //Pausing
     var pauseButton = Crafty.e("2D, Canvas, Color, Mouse");
     pauseButton.attr({
-        x: 110,
+        x: (curWidth / 2) - (baseSize / 2),
         y: 310,
         w: baseSize,
         h: baseSize
@@ -298,9 +299,9 @@ Crafty.defineScene("game", function () {
     totalMassTextVal.attr({ x: 10, y: 280, w: 125 }).text("0").textFont({ size: "20px" });
     
     var scoreText = Crafty.e("2D, DOM, Text");
-    scoreText.attr({ x: 125, y: 260, w: 125 }).text("Points").textFont({ size: "20px" }).css("text-align", "right");
+    scoreText.attr({ x: curWidth - 135, y: 260, w: 125 }).text("Points").textFont({ size: "20px" }).css("text-align", "right");
     var scoreTextVal = Crafty.e("2D, DOM, Text");
-    scoreTextVal.attr({ x: 125, y: 280, w: 125 }).text("0").textFont({ size: "20px" }).css("text-align", "right");
+    scoreTextVal.attr({ x: curWidth - 135, y: 280, w: 125 }).text("0").textFont({ size: "20px" }).css("text-align", "right");
     
     //Timer
     var massTimer = Crafty.e("Delay");
@@ -316,7 +317,7 @@ Crafty.defineScene("game", function () {
     cheating.bind("KeyUp", function (e) {
         if (e.key === Crafty.keys.UP_ARROW) {
             Crafty.pause();
-            var intInc = parseInt(prompt("Increase mass by", "1000"), 10);
+            var intInc = parseInt(prompt("Increase mass by", "10000"), 10);
             if (!isNaN(intInc)) {
                 totalMass += intInc;
             }
