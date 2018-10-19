@@ -1,4 +1,4 @@
-Crafty.init(Crafty.DOM.window.width, Crafty.DOM.window.height, document.getElementById("game"));
+Crafty.init(window.innerWidth, window.innerHeight);
 Crafty.timer.FPS(18); //Sets global frame rate to 20
 
 var curWidth = 568, curHeight = 300;
@@ -146,7 +146,7 @@ Crafty.defineScene("game", function () {
         dotsLevel[dind].text(textRen);
         dotsLevel[dind].attr({ x: dots[dind].x, y: dots[dind].y, w: dots[dind].w });
         dotsLevel[dind].y = dots[dind].y + 22;
-        dotsLevel[dind].css("textAlign", "center");
+        dotsLevel[dind].textAlign("center");
         dotsLevel[dind].textColor("#000000");
         dotsLevel[dind].z = 8;
         
@@ -177,7 +177,7 @@ Crafty.defineScene("game", function () {
     var dotCreator = Crafty.e("2D, Canvas, Color, Mouse");
     dotCreator.attr({
         x: 10,
-        y: 310,
+        y: curHeight + 10,
         w: baseSize,
         h: baseSize
     }).color("green");
@@ -187,7 +187,7 @@ Crafty.defineScene("game", function () {
     dotCreatorInfo.text(baseNewDotCost.toString());
     dotCreatorInfo.attr({ x: dotCreator.x, y: dotCreator.y, w: dotCreator.w });
     dotCreatorInfo.y = dotCreator.y + 28;
-    dotCreatorInfo.css("textAlign", "center");
+    dotCreatorInfo.textAlign("center");
     dotCreatorInfo.textColor("#ff0000");
     dotCreatorInfo.z = 8;
     
@@ -212,7 +212,7 @@ Crafty.defineScene("game", function () {
     var upgrader = Crafty.e("2D, Canvas, Color, Mouse");
     upgrader.attr({
         x: curWidth - baseSize,
-        y: 310,
+        y: curHeight + 10,
         w: baseSize,
         h: baseSize
     }).color("yellow");
@@ -222,7 +222,7 @@ Crafty.defineScene("game", function () {
     upgraderInfo.text("Upgrade");
     upgraderInfo.attr({ x: upgrader.x, y: upgrader.y, w: upgrader.w });
     upgraderInfo.y = upgrader.y + 25;
-    upgraderInfo.css("textAlign", "center");
+    upgraderInfo.textAlign("center");
     upgraderInfo.textColor("black");
     upgraderInfo.z = 8;
 
@@ -272,7 +272,7 @@ Crafty.defineScene("game", function () {
     var pauseButton = Crafty.e("2D, Canvas, Color, Mouse");
     pauseButton.attr({
         x: (curWidth / 2) - (baseSize / 2),
-        y: 310,
+        y: curHeight + 10,
         w: baseSize,
         h: baseSize
     }).color("red");
@@ -282,7 +282,7 @@ Crafty.defineScene("game", function () {
     pauseButtonInfo.text("Pause / Start");
     pauseButtonInfo.attr({ x: pauseButton.x, y: pauseButton.y, w: pauseButton.w });
     pauseButtonInfo.y = pauseButton.y + 16;
-    pauseButtonInfo.css("textAlign", "center");
+    pauseButtonInfo.textAlign("center");
     pauseButtonInfo.textColor("black");
     pauseButtonInfo.z = 8;
 
@@ -299,9 +299,9 @@ Crafty.defineScene("game", function () {
     totalMassTextVal.attr({ x: 10, y: 280, w: 125 }).text("0").textFont({ size: "20px" });
     
     var scoreText = Crafty.e("2D, DOM, Text");
-    scoreText.attr({ x: curWidth - 135, y: 260, w: 125 }).text("Points").textFont({ size: "20px" }).css("text-align", "right");
+    scoreText.attr({ x: curWidth - 135, y: 260, w: 125 }).text("Points").textFont({ size: "20px" }).textAlign("right");
     var scoreTextVal = Crafty.e("2D, DOM, Text");
-    scoreTextVal.attr({ x: curWidth - 135, y: 280, w: 125 }).text("0").textFont({ size: "20px" }).css("text-align", "right");
+    scoreTextVal.attr({ x: curWidth - 135, y: 280, w: 125 }).text("0").textFont({ size: "20px" }).textAlign("right");
     
     //Timer
     var massTimer = Crafty.e("Delay");
