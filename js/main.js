@@ -1,10 +1,11 @@
+Crafty.mobile = true;
 Crafty.init();
-Crafty.timer.FPS(18); //Sets global frame rate to 20
+Crafty.timer.FPS(30); //Sets global frame rate to 20
 
-var minBaseSize = 64, maxBaseSize = 256, _curWidth = 568, _curHeight = 300;
+var minBaseSize = 92, maxBaseSize = 256, _curWidth = 1280, _curHeight = 720, baseSize = 160;
 var curWidth, curHeight;
-curWidth = Crafty.viewport.width;
-curHeight = Crafty.viewport.height;
+curWidth = 1280;
+curHeight = 720;
 
 //Main Menu
 Crafty.defineScene("menu", function () {
@@ -30,15 +31,17 @@ Crafty.defineScene("menu", function () {
 //Game Scene
 Crafty.defineScene("game", function () {
     //Dots definition
-    var dots = [], dotsInner = [], dotsClicker = [], dotsLevel = [], dotsCount = 0, baseMass = 100, baseLevel = 1, baseUpgCost = 50, baseSize = 64, baseMassPerClick = 10, baseUpgPow = 2.5, baseNewDotCost = 100, baseDotCost = 100;
+    var dots = [], dotsInner = [], dotsClicker = [], dotsLevel = [], dotsCount = 0, baseMass = 100, baseLevel = 1, baseUpgCost = 50, baseMassPerClick = 10, baseUpgPow = 2.5, baseNewDotCost = 100, baseDotCost = 100;
     var dotsHor = 0, dotsVer = 0;
-    baseSize = 192;
     var baseDotY = (curHeight / 2) - baseSize;
 
     Crafty.background("#000000"); //iPhone 5s landscape: 568x300
     
     //Playing field definition
     var playField = Crafty.e("2D, Canvas, Color, Mouse");
+    var scaleBy;
+    scaleBy = Math.min(window.innerWidth / _curWidth, window.innerHeight / _curHeight);
+    Crafty.viewport.scale(scaleBy);
     playField.attr({
         x: 0,
         y: 0,
@@ -146,10 +149,10 @@ Crafty.defineScene("game", function () {
         //Dot level text overlay
         var textRen = dots[dind].level.toString();
         dotsLevel[dind] = Crafty.e("2D, DOM, Text").unselectable();
-        dotsLevel[dind].textFont({ size: "20px" });
+        dotsLevel[dind].textFont({ size: "48px", weight: "bold", family: "Helvetica Neue" });
         dotsLevel[dind].text(textRen);
         dotsLevel[dind].attr({ x: dots[dind].x, y: dots[dind].y, w: dots[dind].w });
-        dotsLevel[dind].y = dots[dind].y + 22;
+        dotsLevel[dind].y = dots[dind].y + (baseSize / 2) - 24;
         dotsLevel[dind].textAlign("center");
         dotsLevel[dind].textColor("#000000");
         dotsLevel[dind].z = 8;
@@ -170,8 +173,8 @@ Crafty.defineScene("game", function () {
     //Reset texts on dots
     function resetDotInfo(dif) {
         for (dif = 0; dif < dotsCount; dif = dif + 1) {
-            dotsLevel[dif].textFont({ size: "20px" });
-            dotsLevel[dif].y = dots[dif].y + 22;
+            dotsLevel[dif].textFont({ size: "48px", weight: "bold", family: "Helvetica Neue" });
+            dotsLevel[dif].y = dots[dif].y + (baseSize / 2) - 24;
             dotsLevel[dif].textColor("#000000");
             dotsLevel[dif].text(dots[dif].level.toString());
         }
@@ -180,17 +183,17 @@ Crafty.defineScene("game", function () {
     //Button for creating dots
     var dotCreator = Crafty.e("2D, Canvas, Color, Mouse");
     dotCreator.attr({
-        x: 10,
+        x: 0,
         y: curHeight - minBaseSize - 10,
         w: minBaseSize,
         h: minBaseSize
     }).color("green");
     
     var dotCreatorInfo = Crafty.e("2D, DOM, Text").unselectable();
-    dotCreatorInfo.textFont({ size: "14px" });
+    dotCreatorInfo.textFont({ size: "22px" });
     dotCreatorInfo.text(baseNewDotCost.toString());
     dotCreatorInfo.attr({ x: dotCreator.x, y: dotCreator.y, w: dotCreator.w });
-    dotCreatorInfo.y = dotCreator.y + 28;
+    dotCreatorInfo.y = dotCreator.y + (minBaseSize / 2) - 11;
     dotCreatorInfo.textAlign("center");
     dotCreatorInfo.textColor("#ff0000");
     dotCreatorInfo.z = 8;
@@ -201,12 +204,12 @@ Crafty.defineScene("game", function () {
             totalMass -= baseNewDotCost;
             var dcif;
             for (dcif = 0; dcif < dotsCount; dcif = dcif + 1) {
-                dots[dcif].x -= (baseSize / 2) + 5;
+                dots[dcif].x -= (baseSize / 2) + 10;
                 dotsInner[dcif].x = dots[dcif].x;
                 dotsClicker[dcif].x = dots[dcif].x;
                 dotsLevel[dcif].x = dots[dcif].x;
             }
-            createDot(dotsCount, dots[dotsCount - 1].x + baseSize + 10, baseDotY, baseSize, baseLevel, baseMass);
+            createDot(dotsCount, dots[dotsCount - 1].x + baseSize + 20, baseDotY, baseSize, baseLevel, baseMass);
             baseNewDotCost = Math.pow(dotsCount, 2) * baseDotCost;
             dotCreatorInfo.text(baseNewDotCost.toString());
         }
@@ -215,17 +218,17 @@ Crafty.defineScene("game", function () {
     //Button for upgrading dots
     var upgrader = Crafty.e("2D, Canvas, Color, Mouse");
     upgrader.attr({
-        x: curWidth - minBaseSize - 10,
+        x: curWidth - minBaseSize,
         y: curHeight - minBaseSize - 10,
         w: minBaseSize,
         h: minBaseSize
     }).color("yellow");
     
     var upgraderInfo = Crafty.e("2D, DOM, Text").unselectable();
-    upgraderInfo.textFont({ size: "14px" });
+    upgraderInfo.textFont({ size: "22px" });
     upgraderInfo.text("Upgrade");
     upgraderInfo.attr({ x: upgrader.x, y: upgrader.y, w: upgrader.w });
-    upgraderInfo.y = upgrader.y + 25;
+    upgraderInfo.y = upgrader.y + (minBaseSize / 2) - 11;
     upgraderInfo.textAlign("center");
     upgraderInfo.textColor("black");
     upgraderInfo.z = 8;
@@ -235,8 +238,8 @@ Crafty.defineScene("game", function () {
         if (upg === false) {
             upg = true;
             for (did = 0; did < dotsCount; did = did + 1) {
-                dotsLevel[did].textFont({ size: "14px" });
-                dotsLevel[did].y = dots[did].y + 26;
+                dotsLevel[did].textFont({ size: "48px", weight: "bold", family: "Helvetica Neue" });
+                dotsLevel[did].y = dots[did].y + (baseSize / 2) - 24;
                 dotsLevel[did].textColor("#ff0000");
                 dotsLevel[did].text("-" + (eqUpgCost(did)).toString());
             }
@@ -282,10 +285,10 @@ Crafty.defineScene("game", function () {
     }).color("red");
     
     var pauseButtonInfo = Crafty.e("2D, DOM, Text").unselectable();
-    pauseButtonInfo.textFont({ size: "14px" });
+    pauseButtonInfo.textFont({ size: "22px" });
     pauseButtonInfo.text("Pause / Start");
     pauseButtonInfo.attr({ x: pauseButton.x, y: pauseButton.y, w: pauseButton.w });
-    pauseButtonInfo.y = pauseButton.y + 16;
+    pauseButtonInfo.y = pauseButton.y + (minBaseSize / 2) - 22;
     pauseButtonInfo.textAlign("center");
     pauseButtonInfo.textColor("black");
     pauseButtonInfo.z = 8;
@@ -298,14 +301,14 @@ Crafty.defineScene("game", function () {
     
     //Score and points display
     var totalMassText = Crafty.e("2D, DOM, Text");
-    totalMassText.attr({ x: 10, y: playField.h - 40, w: 60 }).text("Mass").textFont({ size: "20px" });
+    totalMassText.attr({ x: 10, y: playField.h - 80, w: 60 }).text("Mass").textFont({ size: "40px" });
     var totalMassTextVal = Crafty.e("2D, DOM, Text");
-    totalMassTextVal.attr({ x: 10, y: playField.h - 20, w: 125 }).text("0").textFont({ size: "20px" });
+    totalMassTextVal.attr({ x: 10, y: playField.h - 40, w: 125 }).text("0").textFont({ size: "40px" });
     
     var scoreText = Crafty.e("2D, DOM, Text");
-    scoreText.attr({ x: curWidth - 135, y: playField.h - 40, w: 125 }).text("Points").textFont({ size: "20px" }).textAlign("right");
+    scoreText.attr({ x: curWidth - 135, y: playField.h - 80, w: 125 }).text("Points").textFont({ size: "40px" }).textAlign("right");
     var scoreTextVal = Crafty.e("2D, DOM, Text");
-    scoreTextVal.attr({ x: curWidth - 135, y: playField.h - 20, w: 125 }).text("0").textFont({ size: "20px" }).textAlign("right");
+    scoreTextVal.attr({ x: curWidth - 135, y: playField.h - 40, w: 125 }).text("0").textFont({ size: "40px" }).textAlign("right");
     
     //Timer
     var massTimer = Crafty.e("Delay");
@@ -333,3 +336,8 @@ Crafty.defineScene("game", function () {
 Crafty.enterScene("menu");
 
 //Crafty viewport, orientation, gameloop/timer, pausing
+window.addEventListener("resize", function(event) {
+    var scaleBy;
+    scaleBy = Math.min(window.innerWidth / _curWidth, window.innerHeight / _curHeight);
+    Crafty.viewport.scale(scaleBy);
+});
