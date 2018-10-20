@@ -1,7 +1,10 @@
-Crafty.init(window.innerWidth, window.innerHeight);
+Crafty.init();
 Crafty.timer.FPS(18); //Sets global frame rate to 20
 
-var curWidth = 568, curHeight = 300;
+var minBaseSize = 64, maxBaseSize = 256, _curWidth = 568, _curHeight = 300;
+var curWidth, curHeight;
+curWidth = Crafty.viewport.width;
+curHeight = Crafty.viewport.height;
 
 //Main Menu
 Crafty.defineScene("menu", function () {
@@ -26,6 +29,12 @@ Crafty.defineScene("menu", function () {
 
 //Game Scene
 Crafty.defineScene("game", function () {
+    //Dots definition
+    var dots = [], dotsInner = [], dotsClicker = [], dotsLevel = [], dotsCount = 0, baseMass = 100, baseLevel = 1, baseUpgCost = 50, baseSize = 64, baseMassPerClick = 10, baseUpgPow = 2.5, baseNewDotCost = 100, baseDotCost = 100;
+    var dotsHor = 0, dotsVer = 0;
+    baseSize = 192;
+    var baseDotY = (curHeight / 2) - baseSize;
+
     Crafty.background("#000000"); //iPhone 5s landscape: 568x300
     
     //Playing field definition
@@ -34,14 +43,9 @@ Crafty.defineScene("game", function () {
         x: 0,
         y: 0,
         w: curWidth,
-        h: curHeight
+        h: curHeight - minBaseSize - 20
     }).color("#444444");
     playField.z = -9;
-    
-    //Dots definition
-    var dots = [], dotsInner = [], dotsClicker = [], dotsLevel = [], dotsCount = 0, baseMass = 100, baseLevel = 1, baseUpgCost = 50, baseSize = 64, baseMassPerClick = 10, baseUpgPow = 2.5, baseNewDotCost = 100, baseDotCost = 100;
-    var dotsHor = 0, dotsVer = 0;
-    var baseDotY = (curHeight / 2) - baseSize;
     
     //Score
     var totalMass = 0, totalScore = 0, growth = 0, upg = false, delayTimeMass = 200, delayTimeScore = 1000;
@@ -177,9 +181,9 @@ Crafty.defineScene("game", function () {
     var dotCreator = Crafty.e("2D, Canvas, Color, Mouse");
     dotCreator.attr({
         x: 10,
-        y: curHeight + 10,
-        w: baseSize,
-        h: baseSize
+        y: curHeight - minBaseSize - 10,
+        w: minBaseSize,
+        h: minBaseSize
     }).color("green");
     
     var dotCreatorInfo = Crafty.e("2D, DOM, Text").unselectable();
@@ -211,10 +215,10 @@ Crafty.defineScene("game", function () {
     //Button for upgrading dots
     var upgrader = Crafty.e("2D, Canvas, Color, Mouse");
     upgrader.attr({
-        x: curWidth - baseSize,
-        y: curHeight + 10,
-        w: baseSize,
-        h: baseSize
+        x: curWidth - minBaseSize - 10,
+        y: curHeight - minBaseSize - 10,
+        w: minBaseSize,
+        h: minBaseSize
     }).color("yellow");
     
     var upgraderInfo = Crafty.e("2D, DOM, Text").unselectable();
@@ -271,10 +275,10 @@ Crafty.defineScene("game", function () {
     //Pausing
     var pauseButton = Crafty.e("2D, Canvas, Color, Mouse");
     pauseButton.attr({
-        x: (curWidth / 2) - (baseSize / 2),
-        y: curHeight + 10,
-        w: baseSize,
-        h: baseSize
+        x: (curWidth / 2) - (minBaseSize / 2),
+        y: curHeight - minBaseSize - 10,
+        w: minBaseSize,
+        h: minBaseSize
     }).color("red");
     
     var pauseButtonInfo = Crafty.e("2D, DOM, Text").unselectable();
@@ -294,14 +298,14 @@ Crafty.defineScene("game", function () {
     
     //Score and points display
     var totalMassText = Crafty.e("2D, DOM, Text");
-    totalMassText.attr({ x: 10, y: 260, w: 60 }).text("Mass").textFont({ size: "20px" });
+    totalMassText.attr({ x: 10, y: playField.h - 40, w: 60 }).text("Mass").textFont({ size: "20px" });
     var totalMassTextVal = Crafty.e("2D, DOM, Text");
-    totalMassTextVal.attr({ x: 10, y: 280, w: 125 }).text("0").textFont({ size: "20px" });
+    totalMassTextVal.attr({ x: 10, y: playField.h - 20, w: 125 }).text("0").textFont({ size: "20px" });
     
     var scoreText = Crafty.e("2D, DOM, Text");
-    scoreText.attr({ x: curWidth - 135, y: 260, w: 125 }).text("Points").textFont({ size: "20px" }).textAlign("right");
+    scoreText.attr({ x: curWidth - 135, y: playField.h - 40, w: 125 }).text("Points").textFont({ size: "20px" }).textAlign("right");
     var scoreTextVal = Crafty.e("2D, DOM, Text");
-    scoreTextVal.attr({ x: curWidth - 135, y: 280, w: 125 }).text("0").textFont({ size: "20px" }).textAlign("right");
+    scoreTextVal.attr({ x: curWidth - 135, y: playField.h - 20, w: 125 }).text("0").textFont({ size: "20px" }).textAlign("right");
     
     //Timer
     var massTimer = Crafty.e("Delay");
