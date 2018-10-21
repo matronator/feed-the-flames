@@ -2,7 +2,7 @@ Crafty.mobile = true;
 Crafty.init();
 Crafty.timer.FPS(30); //Sets global frame rate to 20
 
-var minBaseSize = 128, maxBaseSize = 256, _curWidth = 1280, _curHeight = 720, baseSize = 160;
+var minBaseSize = 150, maxBaseSize = 256, _curWidth = 1280, _curHeight = 720, baseSize = 160;
 var curWidth, curHeight;
 curWidth = 1280;
 curHeight = 720;
@@ -47,7 +47,7 @@ Crafty.defineScene("game", function () {
         y: 0,
         w: curWidth,
         h: curHeight - minBaseSize - 20
-    }).color("#444444");
+    }).color("#111");
     playField.z = -9;
     
     //Score
@@ -286,14 +286,14 @@ Crafty.defineScene("game", function () {
     
     //Score and points display
     var totalMassText = Crafty.e("2D, DOM, Text");
-    totalMassText.attr({ x: 10, y: playField.h - 80, w: 60 }).text("Mass").textFont({ size: "40px" });
+    totalMassText.attr({ x: 10, y: playField.h - 80, w: 60 }).text("Mass").textFont({ size: "40px" }).textColor("#ffffff");
     var totalMassTextVal = Crafty.e("2D, DOM, Text");
-    totalMassTextVal.attr({ x: 10, y: playField.h - 40, w: 125 }).text("0").textFont({ size: "40px" });
+    totalMassTextVal.attr({ x: 10, y: playField.h - 40, w: 125 }).text("0").textFont({ size: "40px" }).textColor("#ffffff");
     
     var scoreText = Crafty.e("2D, DOM, Text");
-    scoreText.attr({ x: curWidth - 135, y: playField.h - 80, w: 125 }).text("Points").textFont({ size: "40px" }).textAlign("right");
+    scoreText.attr({ x: curWidth - 135, y: playField.h - 80, w: 125 }).text("Points").textFont({ size: "40px" }).textAlign("right").textColor("#ffffff");
     var scoreTextVal = Crafty.e("2D, DOM, Text");
-    scoreTextVal.attr({ x: curWidth - 135, y: playField.h - 40, w: 125 }).text("0").textFont({ size: "40px" }).textAlign("right");
+    scoreTextVal.attr({ x: curWidth - 135, y: playField.h - 40, w: 125 }).text("0").textFont({ size: "40px" }).textAlign("right").textColor("#ffffff");
     
     //Timer
     var massTimer = Crafty.e("Delay");
