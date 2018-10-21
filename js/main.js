@@ -2,7 +2,7 @@ Crafty.mobile = true;
 Crafty.init();
 Crafty.timer.FPS(30); //Sets global frame rate to 20
 
-var minBaseSize = 92, maxBaseSize = 256, _curWidth = 1280, _curHeight = 720, baseSize = 160;
+var minBaseSize = 128, maxBaseSize = 256, _curWidth = 1280, _curHeight = 720, baseSize = 160;
 var curWidth, curHeight;
 curWidth = 1280;
 curHeight = 720;
@@ -181,13 +181,14 @@ Crafty.defineScene("game", function () {
     }
     
     //Button for creating dots
-    var dotCreator = Crafty.e("2D, Canvas, Color, Mouse");
+    Crafty.sprite("./img/newDotButton.png", {sprNewDot:[0,0,256,256]});
+    var dotCreator = Crafty.e("2D, Canvas, Mouse, sprNewDot");
     dotCreator.attr({
         x: 0,
         y: curHeight - minBaseSize - 10,
         w: minBaseSize,
         h: minBaseSize
-    }).color("green");
+    });
     
     var dotCreatorInfo = Crafty.e("2D, DOM, Text").unselectable();
     dotCreatorInfo.textFont({ size: "22px" });
@@ -216,22 +217,14 @@ Crafty.defineScene("game", function () {
     });
     
     //Button for upgrading dots
-    var upgrader = Crafty.e("2D, Canvas, Color, Mouse");
+    Crafty.sprite("./img/upgDotButton.png", {sprUpgDot:[0,0,256,256]});
+    var upgrader = Crafty.e("2D, Canvas, sprUpgDot, Mouse");
     upgrader.attr({
         x: curWidth - minBaseSize,
         y: curHeight - minBaseSize - 10,
         w: minBaseSize,
         h: minBaseSize
-    }).color("yellow");
-    
-    var upgraderInfo = Crafty.e("2D, DOM, Text").unselectable();
-    upgraderInfo.textFont({ size: "22px" });
-    upgraderInfo.text("Upgrade");
-    upgraderInfo.attr({ x: upgrader.x, y: upgrader.y, w: upgrader.w });
-    upgraderInfo.y = upgrader.y + (minBaseSize / 2) - 11;
-    upgraderInfo.textAlign("center");
-    upgraderInfo.textColor("black");
-    upgraderInfo.z = 8;
+    });
 
     upgrader.bind("Click", function () {
         var did;
@@ -276,22 +269,14 @@ Crafty.defineScene("game", function () {
     }
     
     //Pausing
-    var pauseButton = Crafty.e("2D, Canvas, Color, Mouse");
+    Crafty.sprite("./img/pauseButton.png", {sprPause:[0,0,256,256]});
+    var pauseButton = Crafty.e("2D, Canvas, sprPause, Mouse");
     pauseButton.attr({
         x: (curWidth / 2) - (minBaseSize / 2),
         y: curHeight - minBaseSize - 10,
         w: minBaseSize,
         h: minBaseSize
-    }).color("red");
-    
-    var pauseButtonInfo = Crafty.e("2D, DOM, Text").unselectable();
-    pauseButtonInfo.textFont({ size: "22px" });
-    pauseButtonInfo.text("Pause / Start");
-    pauseButtonInfo.attr({ x: pauseButton.x, y: pauseButton.y, w: pauseButton.w });
-    pauseButtonInfo.y = pauseButton.y + (minBaseSize / 2) - 22;
-    pauseButtonInfo.textAlign("center");
-    pauseButtonInfo.textColor("black");
-    pauseButtonInfo.z = 8;
+    });
 
     //Temporarly
     pauseButton.bind("Click", function () {
