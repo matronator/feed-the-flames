@@ -269,7 +269,7 @@ Crafty.defineScene("game", function () {
     }
     
     //Pausing
-    Crafty.sprite("./img/pauseButton.png", {sprPause:[0,0,256,256]});
+    Crafty.sprite("./img/pauseButtons.png", {sprPause:[0,0,256,256]});
     var pauseButton = Crafty.e("2D, Canvas, sprPause, Mouse");
     pauseButton.attr({
         x: (curWidth / 2) - (minBaseSize / 2),
@@ -278,12 +278,25 @@ Crafty.defineScene("game", function () {
         h: minBaseSize
     });
 
-    //Temporarly
+  //Temporarly
     pauseButton.bind("Click", function () {
-        //totalMass += 500;
-        Crafty.pause();
+      if(!Crafty.isPaused()){
+        //Change the button sprite to playbutton
+        pauseButton.sprite(0,256,256,256);
+        //Pause Crafty after 50ms
+        //Allows the sprite to actually update bore pausing
+        Crafty.e("Delay").delay(function(){
+          Crafty.pause();
+        },50, 0);
+      }else{
+        //Change the Button sprite to pause button
+        pauseButton.sprite(0,0,256,256);
+        //Unpause
+        Crafty.pause(false);
+      }
     });
-    
+
+
     //Score and points display
     var totalMassText = Crafty.e("2D, DOM, Text");
     totalMassText.attr({ x: 10, y: playField.h - 80, w: 60 }).text("Mass").textFont({ size: "40px" }).textColor("#ffffff");
