@@ -1,4 +1,4 @@
-# feed-the-flames
+# Feed the Flames
 
 Simple game concept made with CraftyJS
 
