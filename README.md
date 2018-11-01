@@ -1,6 +1,6 @@
 # Feed the Flames
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/matronator/feed-the-flames/issues)
 
 Simple game concept made with CraftyJS
 
