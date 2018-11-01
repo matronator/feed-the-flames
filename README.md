@@ -1,5 +1,7 @@
 # Feed the Flames
 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+
 Simple game concept made with CraftyJS
 
 You can play it here: https://matronator.github.io/feed-the-flames/
