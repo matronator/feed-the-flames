@@ -10,3 +10,43 @@ body, html {
 .wrapper {
     min-height: 100%;
 }
+
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    font-family: 'Audiowide', cursive;
+    background: -webkit-linear-gradient(#FB1010, #FFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    color: white;
+    font-size: 32px;
+    font-family: 'Poor Story', cursive;
+}
+
+p {
+    color: white;
+    font-family: 'Poor Story', cursive;
+    font-size: 18px;
+}
+
+button {
+    width: 128px;
+    height: 48px;
+    background-color: greenyellow;
+    font-size: 32px;
+    color: gray;
+    border: none;
+    cursor: pointer;
+}
+
+.main-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 462.5px 462.5px;
+    grid-gap: 25px;
+}
+
