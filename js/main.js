@@ -13,16 +13,19 @@ Crafty.defineScene("menu", function () {
 
     var gameName = Crafty.e("HTML");
     gameName.attr({
-        x: window.innerWidth/2 - 600,
-        y: window.innerHeight/2 - 300,
-        w: 1200
+        x: (curWidth / 2) - (curWidth / 2),
+        y: 20,
+        w: curWidth,
+        h: 100
     })
-    .replace(`<div class="title"><h1>Feed The Flames</h1></div>`);
+    .replace(`<div class="title">
+        <h1>Feed The Flames</h1>
+    </div>`);
     
     var buttonStart = Crafty.e("HTML, Mouse");
     buttonStart.attr({
-        x: window.innerWidth/2 - 64,
-        y: window.innerHeight/2 - 24,
+        x: curWidth / 2 - 64,
+        y: gameName.h + gameName.y + 100,
         w: 128,
         h: 48
     })
@@ -35,11 +38,24 @@ Crafty.defineScene("menu", function () {
 	//instructions
 	var infoText = Crafty.e("HTML");
     infoText.attr({ 
-        x: window.innerWidth/2 - 475, 
-        y: innerHeight/2 + 150, 
-        w: 925
+        x: 0, 
+        y: buttonStart.y + buttonStart.h + 48,
+        w: curWidth
     })
-    .replace(`<div class="main-container"><div class="instruct"><h2>Instructions:</h2></br><p>Click on the square(s) in the middle before they run out of mass (mass is the empty space). The number in the square is it's level - the higher the level, the more Mass points you get and the slower the square will lose mass. You can pause/unpause the game with the red button.</p></div><div class="upgrades"><h2>Upgrading:</h2></br><p>You can upgrade all squares by clicking the yellow arrow button in the bottom right corner. Upgrading squares costs mass points - mass points are displayed in the bottom left corner - when clicking the yellow arrow button, the text on the squares will show how many mass points you need to upgrade. You can also add new squares by clicking the green "+" button - the cost of new square is displayed inside of the green "+". The more squares you have, the more pcore and mass you get.</p></div></div>`)
+    .replace(`<div class="main-container">
+        <div class="instruct">
+            <h2>Instructions:</h2>
+            <p>Click on the square(s) in the middle before they run out of mass (mass is the empty space). The number in the square is it's level - the higher the level, the more Mass points you get and the slower the square will lose mass. You can pause/unpause the game with the red button.</p>
+        </div>
+        <div class="upgrades">
+            <h2>Upgrading:</h2>
+            <p>You can upgrade all squares by clicking the yellow arrow button in the bottom right corner. Upgrading squares costs mass points - mass points are displayed in the bottom left corner - when clicking the yellow arrow button, the text on the squares will show how many mass points you need to upgrade. You can also add new squares by clicking the green "+" button - the cost of new square is displayed inside of the green "+". The more squares you have, the more pcore and mass you get.</p>
+        </div>
+    </div>`);
+
+    var scaleBy;
+    scaleBy = Math.min(window.innerWidth / _curWidth, window.innerHeight / _curHeight);
+    Crafty.viewport.scale(scaleBy);
 });
 
 //Game Scene
