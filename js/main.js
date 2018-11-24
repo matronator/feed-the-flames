@@ -123,7 +123,7 @@ Crafty.defineScene("game", function () {
             this.h = (this.mass / this.max_mass) * baseSize;
             
             if (this.mass <= 0) {
-                alert("Game Over! Score: " + totalScore);
+                alert("Game Over! Score: " + Math.round(totalScore));
                 Crafty.enterScene("menu");
             }
         });
