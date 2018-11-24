@@ -49,7 +49,7 @@ Crafty.defineScene("menu", function () {
         </div>
         <div class="upgrades">
             <h2>Upgrading:</h2>
-            <p>You can upgrade all squares by clicking the yellow arrow button in the bottom right corner. Upgrading squares costs mass points - mass points are displayed in the bottom left corner - when clicking the yellow arrow button, the text on the squares will show how many mass points you need to upgrade. You can also add new squares by clicking the green "+" button - the cost of new square is displayed inside of the green "+". The more squares you have, the more pcore and mass you get.</p>
+            <p>You can upgrade all squares by clicking the yellow arrow button in the bottom right corner. Upgrading squares costs mass points - mass points are displayed in the bottom left corner - when clicking the yellow arrow button, the text on the squares will show how many mass points you need to upgrade. You can also add new squares by clicking the green "+" button - the cost of new square is displayed inside of the green "+". The more squares you have, the more score and mass you get.</p>
         </div>
     </div>`);
 
