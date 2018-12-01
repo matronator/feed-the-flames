@@ -62,3 +62,20 @@ button {
     flex: 1;
     padding: 0 50px;
 }
+#endgame {
+    display: none;
+    border: 1px solid  #21c900;;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Audiowide', cursive;
+    background: linear-gradient(#FB1010, #FFF);
+    background-clip: content-box;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.show {
+    display: flex;
+}

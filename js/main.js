@@ -80,6 +80,7 @@ Crafty.defineScene("game", function () {
     }).color("#111");
     playField.z = -9;
     
+
     //Score
     var totalMass = 0, totalScore = 0, growth = 0, upg = false, delayTimeMass = 200, delayTimeScore = 1000;
     
@@ -116,18 +117,46 @@ Crafty.defineScene("game", function () {
             max_mass: mass
         }).color("white");
         dots[dind].z = 1;
+
         
+  //Game Over Alert
+  var gameOver = Crafty.e("HTML");
+  gameOver.attr({
+      x: 450,
+      y: 150,
+      w: 400,
+      h: 300
+  })
+  .replace(`<div id="endgame">
+  <div class="message">Game Over! Score: ${Math.round(totalScore)}</div><br>
+  <button class="home">OK</button>
+</div>`);
+
+gameOver.bind("Click", function (e) {
+    Crafty.enterScene("menu");
+});
+
+    const addAlert =function () {
+         $('#endgame').show();
+     }
+      
+
         //Decrease mass
         dots[dind].bind("EnterFrame", function () {
             this.mass = this.mass - 1;
             this.h = (this.mass / this.max_mass) * baseSize;
             
             if (this.mass <= 0) {
-                alert("Game Over! Score: " + Math.round(totalScore));
-                Crafty.enterScene("menu");
+            
+                addAlert();
+                // alert("Game Over! Score: " + Math.round(totalScore));
+                // Crafty.enterScene("menu");
             }
+       
         });
-        
+
+      
+
         //Second part
         dotsInner[dind] = Crafty.e("2D, Canvas, Color").attr({
             x: xc,
@@ -346,6 +375,7 @@ Crafty.defineScene("game", function () {
         totalScore += dotsCount / 5;
         scoreTextVal.text(Math.round(totalScore).toString());
     }, delayTimeMass, -1);
+    
     
     //Temporarly cheats
     var cheating = Crafty.e("DOM, Keyboard");
