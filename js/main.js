@@ -35,6 +35,25 @@ Crafty.defineScene("menu", function () {
         Crafty.enterScene("game");
     });
 
+    // Fullscreen Button
+    Crafty.sprite("./img/fullscreen.png", {sprFullScreen:[0,0,512,512]});
+    var buttonFullScreen = Crafty.e("2D, Canvas, Mouse, sprFullScreen");
+    buttonFullScreen.attr({
+        x: curWidth / 1.1,
+        y: gameName.h + gameName.y - 40,
+        w: 50,
+        h: 50
+    });
+
+    buttonFullScreen.bind("Click", function (e) {
+        if(document.webkitFullscreenElement == null) {
+            document.documentElement.webkitRequestFullscreen();
+        }
+        else {
+            document.webkitExitFullscreen();
+        }
+    });
+
 	//instructions
 	var infoText = Crafty.e("HTML");
     infoText.attr({ 
