@@ -142,7 +142,8 @@ Crafty.defineScene("game", function () {
             this.h = (this.mass / this.max_mass) * baseSize;
             
             if (this.mass <= 0) {
-                alert("Game Over! Score: " + Math.round(totalScore));
+                //calling custom function to display game over popup
+                showGameOverPopup(Math.round(totalScore));
                 Crafty.enterScene("menu");
             }
         });
@@ -388,3 +389,24 @@ window.addEventListener("resize", function(event) {
     scaleBy = Math.min(window.innerWidth / _curWidth, window.innerHeight / _curHeight);
     Crafty.viewport.scale(scaleBy);
 });
+
+//function to show the game over custom pop up window
+function showGameOverPopup(score){
+    $.alert({
+        title: 'Game Over',
+        content: 'Your total score is: '+score,
+        theme: 'material',
+        columnClass: 'small',
+        animation: 'scale',
+        type: 'purple',
+        closeAnimation: 'scale',
+        buttons: {
+            okay: {
+                text: 'Ok',
+                action: function(){
+                }
+            }
+        }
+    });
+}
+
