@@ -62,3 +62,32 @@ button {
     flex: 1;
     padding: 0 50px;
 }
+
+/* GAME OVER ALERT THEME */
+
+.jconfirm.jconfirm-custom .jconfirm-bg {
+  background-color: #0000008a;
+}
+.jconfirm.jconfirm-custom .jconfirm-box {
+  width: 75vw;
+  margin: 0 auto;
+  padding-top: 2rem;
+  padding-top: 1.5rem;
+  border: none !important;
+  background: #e5e5e5;
+  font-family: "Poor Story", cursive;
+  text-align: center;
+}
+.jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button {
+  background: #28af06 !important;
+  font-family: "Audiowide", sans-serif;
+  font-size: 1.125rem;
+  border-radius: 10px;
+}
+.jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content {
+  font-size: 1.25rem;
+}

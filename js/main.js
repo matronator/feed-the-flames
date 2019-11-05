@@ -395,7 +395,7 @@ function showGameOverPopup(score){
     $.alert({
         title: 'Game Over',
         content: 'Your total score is: '+score,
-        theme: 'material',
+        theme: 'custom',
         columnClass: 'small',
         animation: 'scale',
         type: 'purple',
