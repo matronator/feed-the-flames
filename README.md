@@ -12,6 +12,19 @@ You can play it here: https://matronator.github.io/feed-the-flames/
 
 If you have any suggestions to improve the game or some new features to be implemented, feel free to open a new issue describing your idea.
 
+
+## FAQ & Instructions 
+*Add instructions for downloading this project so others can also work on it and see how the code works exactly. 
+*Add general FAQ section? 
+*Give some points as to how the code works so others can understand and add to your game!*
+Instructions: 
+Click on the square(s) in the middle of the screen before they disappear. The number within the square is its level. Depending on how high that level is will decide how many mass points you receieve. If you need to pause, click the red pause button. The more points you get the slower the squares disappear. 
+
+Have fun! 
+
+Feed that Flame!
+
+
 ## More stuff
 
 [Portfolio](https://matronator.com) (WIP)  
